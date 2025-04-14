@@ -76,3 +76,6 @@ clinical_scores/
 clinical_scores_import.ipynb
 
 data/
+Old/
+Participants/
+.pyc

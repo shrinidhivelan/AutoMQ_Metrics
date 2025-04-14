@@ -123,7 +123,8 @@ def main():
     print("Combined DataFrame saved as 'df_combined_time_series.csv'")
     
     # Optionally load the saved DataFrame
-    df_combined = pd.read_csv('df_combined_time_series.csv')
+    os.makedirs('data', exist_ok=True)
+    df_combined = pd.read_csv('data/df_combined_time_series.csv')
     return df_combined
 
 # Run the main function

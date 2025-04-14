@@ -97,13 +97,14 @@ def process_all_patients(patient_dir_data, patient_current_dir, mode='raw'):
         df_final = pd.concat(all_data, ignore_index=True)
         df_final['log_movement_smoothness'] = np.log(df_final['movement_smoothness'] + 1)
         df_final['frame_number'] = (df_final.groupby(['participant_id', 'trial_number']).cumcount())
+        os.makedirs('data', exist_ok=True)
 
         if mode == 'dtw':
-            df_final.to_pickle("aligned_dtw_data.pkl")
-            df_final.to_csv("aligned_dtw_data.csv", index=False)
+            df_final.to_pickle(os.path.join("data","aligned_dtw_data.pkl"))
+            df_final.to_csv(os.path.join("data","aligned_dtw_data.csv"), index=False)
         elif mode == 'raw':
-            df_final.to_pickle("raw_appended_data.pkl")
-            df_final.to_csv("raw_appended_data.csv", index=False)
+            df_final.to_pickle(os.path.join("data","raw_appended_data.pkl"))
+            df_final.to_csv(os.path.join("data","raw_appended_data.csv"), index=False)
 
         print(f"✅ Successfully processed data in '{mode}' mode. Total rows: {len(df_final)}")
     else:

@@ -14,9 +14,13 @@ from scipy.signal import welch
 
 
 def save_dataframe(df, participant_id, file_name):
+    os.makedirs('data', exist_ok=True)
     folder_name = f"{participant_id}"
-    os.makedirs(folder_name, exist_ok=True)  # Create the folder if it doesn't exist
-    file_path = os.path.join(folder_name, f"{file_name}.pkl")
+    participants_path = os.path.join('data','Participants', folder_name)
+
+    os.makedirs(participants_path, exist_ok=True)  # Create the folder if it doesn't exist
+    
+    file_path = os.path.join(participants_path, f"{file_name}.pkl")
     
     with open(file_path, 'wb') as f:
         pickle.dump(df, f)
@@ -24,7 +28,7 @@ def save_dataframe(df, participant_id, file_name):
 
 # Function to load DataFrame from a pickle file
 def load_dataframe(participant_id, file_name):
-    file_path = os.path.join(participant_id, f"{file_name}.pkl")
+    file_path = os.path.join('Participants',participant_id, f"{file_name}.pkl")
     
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
